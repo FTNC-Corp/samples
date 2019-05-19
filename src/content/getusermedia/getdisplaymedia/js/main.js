@@ -6,7 +6,7 @@
  *  tree.
  */
 'use strict';
-import {LitElement, html} from 'https://unpkg.com/@polymer/lit-element@0.6.2?module';
+import {LitElement, html} from 'https://unpkg.com/@polymer/lit-element@0.6.2/lit-element.js?module';
 
 class ScreenSharing extends LitElement {
   constructor() {
@@ -63,6 +63,8 @@ video {
   static _startScreenCapture() {
     if (navigator.getDisplayMedia) {
       return navigator.getDisplayMedia({video: true});
+    } else if (navigator.mediaDevices.getDisplayMedia) {
+      return navigator.mediaDevices.getDisplayMedia({video: true});
     } else {
       return navigator.mediaDevices.getUserMedia({video: {mediaSource: 'screen'}});
     }
